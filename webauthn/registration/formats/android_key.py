@@ -76,7 +76,7 @@ def verify_android_key(
         x5c_root_cert_pem = x5c_root_cert_x509.public_bytes(Encoding.PEM)
     except Exception as exc:
         raise InvalidRegistrationResponse(
-            "Could not parse x5c root certificate (Android Key)"
+            "Could not parse x5c root certificate. See __cause__ for more info (Android Key)"
         ) from exc
 
     # Make sure x509 forms a complete, valid cert chain
@@ -125,7 +125,7 @@ def verify_android_key(
         attestation_cert_pub_key = attestation_cert.public_key()
     except Exception as exc:
         raise InvalidRegistrationResponse(
-            "Could not parse attestation certificate public key (Android Key)"
+            "Could not parse attestation certificate public key. See __cause__ for more info (Android Key)"
         ) from exc
 
     try:
