@@ -36,7 +36,9 @@ def validate_certificate_chain(
         leaf_cert_crypto = load_der_x509_certificate(leaf_cert_bytes)
         leaf_cert = X509().from_cryptography(leaf_cert_crypto)
     except Exception as exc:
-        raise InvalidCertificateChain("Could not prepare leaf cert") from exc
+        raise InvalidCertificateChain(
+            "Could not prepare leaf cert. See __cause__ for more info"
+        ) from exc
 
     # Prepare any intermediate certs
     try:
@@ -47,7 +49,9 @@ def validate_certificate_chain(
         ]
         intermediate_certs = [X509().from_cryptography(cert) for cert in intermediate_certs_crypto]
     except Exception as exc:
-        raise InvalidCertificateChain("Could not prepare intermediate certs") from exc
+        raise InvalidCertificateChain(
+            "Could not prepare intermediate certs. See __cause__ for more info"
+        ) from exc
 
     # Prepare a collection of possible root certificates
     cert_store = _generate_new_cert_store()
@@ -55,7 +59,9 @@ def validate_certificate_chain(
         for cert in pem_root_certs_bytes:
             cert_store.add_cert(pem_cert_bytes_to_open_ssl_x509(cert))
     except Exception as exc:
-        raise InvalidCertificateChain("Could not prepare root certs") from exc
+        raise InvalidCertificateChain(
+            "Could not prepare root certs. See __cause__ for more info"
+        ) from exc
 
     # Load certs into a "context" for validation
     context = X509StoreContext(
@@ -68,7 +74,9 @@ def validate_certificate_chain(
     try:
         context.verify_certificate()
     except X509StoreContextError as exc:
-        raise InvalidCertificateChain("Certificate chain could not be validated") from exc
+        raise InvalidCertificateChain(
+            "Certificate chain could not be validated. See __cause__ for more info"
+        ) from exc
 
     return True
 
