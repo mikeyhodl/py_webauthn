@@ -1,7 +1,6 @@
 from typing import List, Optional
 
 from OpenSSL.crypto import (
-    X509,
     X509Store,
     X509StoreContext,
     X509StoreContextError,
