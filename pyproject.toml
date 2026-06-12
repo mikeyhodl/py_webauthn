@@ -39,3 +39,9 @@ webauthn = ["py.typed"]
 
 [tool.setuptools.dynamic]
 version = { attr = "webauthn.__version__" }
+
+[dependency-groups]
+dev = [
+    "black>=26.5.1",
+    "mypy>=2.1.0",
+]
