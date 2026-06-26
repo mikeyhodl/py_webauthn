@@ -3,7 +3,7 @@ from unittest import TestCase
 from webauthn import base64url_to_bytes, verify_authentication_response
 
 
-class TestVerifyAuthenticationResponse(TestCase):
+class TestVerifyAuthenticationResponsePQC(TestCase):
     def test_verify_ml_dsa_44_response(self) -> None:
         credential = {
             "id": "-EM9FDFIdFVeqWdTycRjoZVN2ZS4vnVE-MBpg7k0pl4jpuqj4GnMCW3Wqlm2WWI2PQ",
